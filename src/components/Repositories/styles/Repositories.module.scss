@@ -1,0 +1,67 @@
+.repositoriesSearch {
+	width: 45%;
+}
+.favoritesRepositeries {
+	width: 45%;
+}
+.repositoriesContainer {
+	display: flex;
+	justify-content: space-around;
+	width: 40%;
+	margin-top: 50px;
+	color: #949494;
+}
+.repositoriesHeader {
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 20px;
+}
+.repositoryContainer {
+	padding: 10px;
+	border-radius: 5px;
+	transition: 0.2s all ease-in-out;
+	&:hover {
+		box-shadow: 0px 0px 5px 5px #4d4d4d;
+		cursor: pointer;
+	}
+}
+.favRepositoryContainer {
+	padding: 10px;
+	&:not(:last-child) {
+	}
+}
+.repositoryImg {
+	width: 200px;
+	& img {
+		border-radius: 10px;
+		width: 100%;
+		height: 100%;
+	}
+}
+.repositoryLink {
+	& button {
+		height: 25px;
+		border-radius: 3px;
+		margin-bottom: 20px;
+		margin-top: 10px;
+		border: none;
+		color: #434343;
+		&:hover {
+			background-color: #b7b7b7;
+			cursor: pointer;
+		}
+		transition: 0.2s background-color ease-in-out;
+	}
+}
+
+/// Media ///
+.repositoriesContainer {
+	@media (max-width: 1500px) {
+		width: 50%;
+	}
+	@media (max-width: 1300px) {
+		width: 60%;
+	}
+	@media (max-width: 1000px) {
+		width: 70%;
+	}
+}
