@@ -1,6 +1,5 @@
 import { makeAutoObservable } from 'mobx'
 import { IResponseUser } from '../types/types'
-import { duplicateRepository } from '../helpers/store.helper'
 
 class Store {
 	state: IResponseUser[] = []
@@ -10,11 +9,16 @@ class Store {
 	}
 
 	addRepository = (repository: IResponseUser) => {
-		if (!duplicateRepository(this.state, repository.id)) {
+		const isDuplicate = this.checkDuplicate(repository.id)
+		if (!isDuplicate) {
 			this.state.push(repository)
 		} else {
 			alert(`Пользователь ${repository.name} уже есть в данном списке!`)
 		}
+	}
+
+	private checkDuplicate = (id: number): boolean => {
+		return this.state.some((el) => el.id === id)
 	}
 }
 

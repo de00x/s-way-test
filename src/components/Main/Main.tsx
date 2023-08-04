@@ -9,7 +9,7 @@ export const Main: FC = () => {
 	const [inputValue, setInputValue] = useState('')
 	const [repositoryData, setRepositoryData] = useState<IResponseUser[]>([])
 
-	const { handleQueryChange } = MainControllers({
+	const { handleInputChange } = MainControllers({
 		setInputValue,
 		setRepositoryData,
 	})
@@ -19,7 +19,11 @@ export const Main: FC = () => {
 			<div className={styles.headerConnectMeContainer}>
 				<div>Search GitHub</div>
 				<div>
-					<a href="https://career.habr.com/de00x" target="_blank">
+					<a
+						target="_blank"
+						rel="noopener noreferrer"
+						href="https://career.habr.com/de00x"
+					>
 						by Denis Kartashov
 					</a>
 				</div>
@@ -29,7 +33,7 @@ export const Main: FC = () => {
 					type="text"
 					placeholder="Search..."
 					value={inputValue}
-					onChange={(e) => handleQueryChange(e)}
+					onChange={(e) => handleInputChange(e)}
 				/>
 				<CopyText inputValue={inputValue} />
 			</div>

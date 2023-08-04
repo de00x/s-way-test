@@ -1,12 +1,14 @@
+import { useCallback } from 'react'
 import { ICopyTextControllsProps } from '../../../types/types'
 
-const CopyTextControllers = ({ ...props }: ICopyTextControllsProps) => {
-	const editTextButton = () => {
-		props.setTextButton('Copied')
+const CopyTextControllers = ({ setTextButton }: ICopyTextControllsProps) => {
+	const editTextButton = useCallback(() => {
+		setTextButton((prevTextButton) => (prevTextButton = 'Copied'))
 		setTimeout(() => {
-			props.setTextButton('Copy')
+			setTextButton((prevTextButton) => (prevTextButton = 'Copy'))
 		}, 2000)
-	}
+	}, [setTextButton])
+
 	return { editTextButton }
 }
 

@@ -1,59 +1,31 @@
 import axios from 'axios'
-import { useCallback } from 'react'
-import { debounce } from 'lodash-es'
+import { useDebouncedCallback } from '../../../hooks'
 import { IMainControllersProps } from '../../../types/types'
 
-const MainControllers = ({ ...props }: IMainControllersProps) => {
-	const makeRequest = useCallback(
-		debounce((inputValue: string) => {
+const MainControllers = ({
+	setRepositoryData,
+	setInputValue,
+}: IMainControllersProps) => {
+	const makeRequest = useDebouncedCallback((inputValue: string) => {
+		if (inputValue.length !== 0) {
 			axios
 				.get(`https://api.github.com/search/repositories?q=${inputValue}`)
-				.then((res) => props.setRepositoryData(res.data.items))
+				.then((res) => setRepositoryData(res.data.items))
 				.catch((err) => console.log(err))
-		}, 1000),
-		[]
-	)
+		}
+	}, 1000)
 
-	const handleQueryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target
-		makeRequest(value)
-		props.setInputValue(value)
+		setInputValue(value)
+		executeRequest(value)
 	}
 
-	return { handleQueryChange }
+	const executeRequest = (inputValue: string) => {
+		makeRequest(inputValue)
+	}
+
+	return { handleInputChange }
 }
 
 export default MainControllers
-
-/// debounce ///
-
-// function debounce(cb, delay) {
-// 	let timeout
-
-// 	return (...args) => {
-// 		clearTimeout(timeout)
-// 		timeout = setTimeout(() => {
-// 			cb(...args)
-// 		}, delay)
-// 	}
-// }
-
-/// debounce ///
-
-/// throttling ///
-
-// function throttle(cb, delay) {
-// 	let shouldWait = false
-// 	let waitingArgs
-// 	const timeoutFunc = () => {
-// 		if (waitingArgs == null) {
-// 			shouldWait = false
-// 		} else {
-// 			cb(...waitingArgs)
-// 			waitingArgs = null
-// 			setTimeout(timeoutFunc, delay)
-// 		}
-// 	}
-// }
-
-/// throttling ///

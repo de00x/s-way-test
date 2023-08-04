@@ -6,7 +6,8 @@ const RepositoriesControllers = () => {
 
 	const redirectToCurrUser = (repository: IResponseUser) => {
 		return () => {
-			localStorage.setItem('currUser', JSON.stringify(repository))
+			const repositoryString = JSON.stringify(repository)
+			localStorage.setItem('currUser', repositoryString)
 			navigate('/repositoryPage')
 		}
 	}
